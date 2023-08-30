@@ -1,0 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Arbutus+Slab&family=EB+Garamond&family=Gowun+Dodum&family=Lekton&family=New+Tegomin&family=Nova+Flat&family=Rajdhani:wght@500&family=Raleway:wght@300;400&family=Recursive:wght@300&family=Sunshiney&family=Tinos&display=swap');
+
+h1, h2, h3, h4, h5, h6, p, div, span, button {
+  font-family: 'Arbutus Slab', serif;
+}
