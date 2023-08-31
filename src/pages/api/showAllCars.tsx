@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import connectDB from "@/utils/db"
-import Car from "@/models/car"
+import Car from '../../models/Car'
 
 
 

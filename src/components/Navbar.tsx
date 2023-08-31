@@ -1,6 +1,8 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsPersonVcardFill } from "react-icons/bs";
+import Link from 'next/link';
 
 
 const Navbar = () => {
@@ -9,7 +11,9 @@ const Navbar = () => {
 
   return (
 
-    <nav className='d-flex justify-content-between'>
+   <>
+    
+     <nav className='d-flex justify-content-between'>
 
          <div>
            <button className="btn btn-dark ms-3 my-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
@@ -18,11 +22,17 @@ const Navbar = () => {
 
             <div className="offcanvas offcanvas-start" data-bs-scroll="true" tabIndex='-1' id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
               <div className="offcanvas-header">
-                <h5 className="offcanvas-title" id="offcanvasWithBothOptionsLabel">Backdrop with scrolling</h5>
+                <h5 className="offcanvas-title" id="offcanvasWithBothOptionsLabel">Menu</h5>
                 <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
               </div>
               <div className="offcanvas-body">
-                <p>Try scrolling the rest of the page to see this option in action.</p>
+
+               <Link href={'/createNew'} 
+                      className='btn btn-dark rounded-1 vstack mx-auto' 
+                      style={{width: '200px'}}>
+                Create New Item
+              </Link>
+
               </div>
             </div>
          </div>
@@ -34,17 +44,44 @@ const Navbar = () => {
             <BsPersonVcardFill/>
           </button>
 
-            <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
               <div className="offcanvas-header">
-                <h5 className="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+                <h5 className="offcanvas-title" id="offcanvasRightLabel">Select Car</h5>
                 <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
               </div>
               <div className="offcanvas-body">
-                ...
+                <div className='rightSide'>
+                    <img src="/ford.jpg" 
+                          style={{width: '195px', cursor:'pointer'}} 
+                          alt="img" />  
+                    <img src="/volvo.jpg" 
+                          style={{width: '195px', cursor:'pointer'}} 
+                          alt="img" />  
+                    <img src="/tesla.jpg" 
+                          style={{width: '195px', cursor:'pointer'}} 
+                          alt="img" />  
+                    <img src="/tesla3.jpg" 
+                          style={{width: '195px', cursor:'pointer'}} 
+                          alt="img" />  
+                    </div>
               </div>
             </div>
          </div>
     </nav>
+
+
+    <style>{`
+      
+      .rightSide {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        margin-left: 30px;
+      }
+    
+    `}</style>
+   
+   </>
 
   )
 }
