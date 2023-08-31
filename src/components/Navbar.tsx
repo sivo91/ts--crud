@@ -37,7 +37,7 @@ const Navbar = () => {
             </div>
          </div>
 
-          <h3 className='my-3'>TypeScript CRUD</h3>
+          <h3 className='my-3'>TS CRUD & MongoDB</h3>
 
          <div>
           <button className="btn btn-dark me-3 my-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
