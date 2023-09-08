@@ -3,14 +3,19 @@ import React from 'react'
 import Link from 'next/link'
 import axios from 'axios'
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/router'
 
 const CreateNew = () => {
+
+ const router = useRouter()
 
  const [name, setName] = React.useState<string>('')
  const [year, setYear] = React.useState<string>('')
  const [color, setColor] = React.useState<string>('')
  const [img, setImg] = React.useState<string>('')
  const [model, setModel] = React.useState<string>('')
+ const [alerto, setAlerto] = React.useState<boolean>(false)
+ 
 
  const data = {name, year, color, img, model}
  console.log(data)
@@ -28,26 +33,61 @@ const CreateNew = () => {
 
  try {
   
+  if(data.name === '' ||
+     data.year === '' ||
+     data.color === '' || 
+     data.img === '' ||
+     data.model === '') {
+     return alertoFunc('Invalid inputs')
+     }
+
   const res = await axios.post('/api/createNew', data, config)
   console.log(res.data)
   toast.success(res.data.message)
 
+  alertoFunc('Car successfully created!')
+  
   setName('')
   setColor('')
   setYear('')
   setImg('')
   setModel('')
+
+  setTimeout(() => {
+    router.push('/')
+  },3000)
   
 
  } catch (error: any) {
    console.log(error.message)
+   setAlerto(false)
  }
 
+ }
+
+
+ const alertoFunc = (param: string) => {
+     const alrt = document.querySelector('.alerto') as HTMLDivElement;
+     alrt.classList.remove('hidden')
+     alrt.textContent =  param
+
+     
+
+     
+     setTimeout(() => {
+      alrt.classList.remove('show')
+      alrt.classList.add('hidden')
+     },2500)
  }
 
 
   return (
    <>
+
+       <div className="alert alert-light mx-5 alerto border-dark hidden text-center fw-semibold fs-3"  role="alert"
+        id="alert">
+          Error
+        </div>
       
       <form className='my-3' onSubmit={handleSubmit}>
 
@@ -102,10 +142,12 @@ const CreateNew = () => {
               alt="img" />  
         </div>                 
 
-       <button className='btn btn-primary rounded-1 mt-3'
+      {/*  <button className='btn btn-primary rounded-1 mt-3'
                type='submit'>
         Create New  
-      </button>         
+      </button>   */}      
+
+      <input type="submit" value='Create Car' className='mb-5 mt-3 py-2' /> 
         
       </form>
 
@@ -123,6 +165,14 @@ const CreateNew = () => {
      </Link>
 
      <style>{`
+
+     .hidden {
+      display: none;
+     }
+
+     .show {
+      display: block;
+     }
 
      .imgBox {
       position: relative;
