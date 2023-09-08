@@ -9,16 +9,20 @@ import { toast } from 'react-toastify';
 const Home = () => {
 
   const[cars, setCars] = React.useState<string[]>([])
+  const[load, setLoad] = React.useState<boolean>(false)
   //console.log(cars)
 
 
   const getCars = async () => {
     try {
+      setLoad(true)
       const res = await axios.get('/api/showAllCars')
       console.log(res.data)
       setCars(res.data.cars)
+      setLoad(false)
     } catch (error: any) {
       console.log(error.message)
+      setLoad(false)
     }
   }
 
@@ -63,7 +67,11 @@ const Home = () => {
      </Link>
 
       {
-        cars.length < 1 &&
+        load && <p className='text-center mt-5'>Fetching Data...</p>
+      }
+
+      {
+        cars.length < 1 && load === false &&
         <h3 className='text-center mt-5'>List is emptpy.</h3>
       } 
 
